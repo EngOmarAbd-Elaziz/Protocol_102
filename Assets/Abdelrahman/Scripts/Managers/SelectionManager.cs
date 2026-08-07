@@ -25,6 +25,11 @@ public class SelectionManager : MonoBehaviour
 
     private void HandleSelection()
     {
+        if (SimulationManager.Instance.IsSimulationRunning)
+        {
+            return;
+        }
+
         Vector2 mousePosition = GameInputManager.Instance.GetMousePosition();
         Ray ray = mainCamera.ScreenPointToRay(mousePosition);
 

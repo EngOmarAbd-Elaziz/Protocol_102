@@ -7,9 +7,6 @@ public class PlanningManager : MonoBehaviour
     public static PlanningManager Instance { get; private set; }
 
     // Private :-
-
-    // علشان محدش يغير الحاجات اللي جوا الليست من برا
-    //private IReadOnlyList<PlannedAction> plannedActions = new List<PlannedAction>();
     private List<PlannedAction> plannedActions = new List<PlannedAction>();
     private InteractableObject firstSelection;
 
@@ -51,5 +48,11 @@ public class PlanningManager : MonoBehaviour
     public List<PlannedAction> GetPlannedActions()
     {
         return plannedActions;
+    }
+
+    public void ClearActions()
+    {
+        plannedActions.Clear();
+        Debug.Log("Planned actions cleared.");
     }
 }

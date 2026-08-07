@@ -1,16 +1,52 @@
+﻿using System.Collections;
 using UnityEngine;
+using System;
 
-public class Burner : MonoBehaviour
+public class Burner : InteractableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static event Action OnBurnerActivated;
+
+    [Header("Burner")]
+    [SerializeField] private GameObject fireEffect;
+    [SerializeField] private GameObject lightOfFire;
+    private bool isOn;
+
+
+    private void Start()
+    {
+        fireEffect.SetActive(false);
+        lightOfFire.SetActive(false);
+    }
+
+    public override void Interact()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ApplyReaction(ReactionType reactionType)
     {
-        
+        base.ApplyReaction(reactionType);
+
+        switch (reactionType)
+        {
+            case ReactionType.Ignite:
+                TurnOn();
+                break;
+        }
+    }
+
+    private void TurnOn()
+    {
+        if (isOn)
+        {
+            return;
+        }
+
+        isOn = true;
+        fireEffect.SetActive(true);
+        lightOfFire.SetActive(true);
+
+        // بنده الفانشكن اللي جوا لما النار تشتغل علشان افتح الباب بيها
+        OnBurnerActivated?.Invoke();
     }
 }

@@ -2,9 +2,14 @@
 
 public class Jar : InteractableObject
 {
-    [SerializeField] private Renderer liquidRenderer;
-    [SerializeField] private Renderer defaultMaterial;
+
+    public bool IsMixed => isMixed;
+
+
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private int liquidMaterialIndex = 3;
     [SerializeField] private Material purpleMaterial;
+    private Material currentLiquidMaterial;
 
 
     private bool isMixed = false;
@@ -24,9 +29,19 @@ public class Jar : InteractableObject
         {
             case ReactionType.Mix:
                 isMixed = true;
-                liquidRenderer.material = purpleMaterial;
+                ChangeLiquidMaterial(purpleMaterial);
+                Debug.Log("Jar Mixed");
                 break;
         }
+
+}
+
+    public void ChangeLiquidMaterial(Material newMaterial)
+    {
+        Material[] materials = meshRenderer.materials;
+        materials[liquidMaterialIndex] = newMaterial;
+        meshRenderer.materials = materials;
+        currentLiquidMaterial = newMaterial;
     }
 
 }
