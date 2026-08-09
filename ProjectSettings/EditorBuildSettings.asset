@@ -6,6 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Scenes/Level0.unity
     guid: 13f3861e88dbc174f868959b98c39747
   - enabled: 1
@@ -23,6 +24,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level5.unity
     guid: 3f96e6a52e5bae74aac59742f9862526
+=======
+    path: Assets/Scenes/SignatureScene.unity
+    guid: c6c957691ed5e344d8d46f026a4efb3a
+>>>>>>> Stashed changes
   - enabled: 1
     path: Assets/Scenes/MainMenuScene.unity
     guid: 25878203aca9e314fbff1a76495aad9b
@@ -30,8 +35,28 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: 5277aa9641e162243a36b7f7f1b63f53
   - enabled: 1
+<<<<<<< Updated upstream
     path: Assets/Scenes/SignatureScene.unity
     guid: c6c957691ed5e344d8d46f026a4efb3a
+=======
+    path: Assets/Scenes/TutLevel.unity
+    guid: 13f3861e88dbc174f868959b98c39747
+  - enabled: 1
+    path: Assets/Scenes/LevelOne.unity
+    guid: 7fbdf8203fa234d42ba181740d13286a
+  - enabled: 1
+    path: Assets/Scenes/LevelTwo.unity
+    guid: 4ee4c4cc170e6c548965d21885ebd991
+  - enabled: 1
+    path: Assets/Scenes/LevelThree.unity
+    guid: 5de250b00e0cd334f9c8fb0d06480771
+  - enabled: 1
+    path: Assets/Scenes/LevelFour.unity
+    guid: 927b24c61aa4584478444ca5703693f5
+  - enabled: 1
+    path: Assets/Scenes/LevelFive.unity
+    guid: 3f96e6a52e5bae74aac59742f9862526
+>>>>>>> Stashed changes
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0
