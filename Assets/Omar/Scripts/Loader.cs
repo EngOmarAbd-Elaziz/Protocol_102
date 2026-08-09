@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public static class Loader
 {
     [SerializeField] private static int _targetSceneIndex;
-    [SerializeField] private static int _loadingSceneIndex = 2;
+    [SerializeField] private static int _loadingSceneIndex = 1;
 
     public static void Load(int sceneIndex)
     {

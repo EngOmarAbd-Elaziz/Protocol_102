@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignatureManager
   videoPlayer: {fileID: 77335378}
-  _mainMenuScene: 1
+  _mainMenuScene: 2
 --- !u!4 &774222409
 Transform:
   m_ObjectHideFlags: 0
