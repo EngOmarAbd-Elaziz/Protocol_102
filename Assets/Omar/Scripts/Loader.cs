@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public static class Loader
 {
-    [SerializeField] private static int _targetSceneIndex;
-    [SerializeField] private static int _loadingSceneIndex = 1;
+    private static int _targetSceneIndex;
+    private static int _loadingSceneIndex = 1;
 
     public static void Load(int sceneIndex)
     {
