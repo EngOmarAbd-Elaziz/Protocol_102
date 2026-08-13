@@ -923,6 +923,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 965272069319754170, guid: 7a7ee0e56dd83ed4c9dea2f97b571032, type: 3}
+      propertyPath: m_Size.x
+      value: 0.71469325
+      objectReference: {fileID: 0}
+    - target: {fileID: 965272069319754170, guid: 7a7ee0e56dd83ed4c9dea2f97b571032, type: 3}
+      propertyPath: m_Center.x
+      value: 0.22295915
+      objectReference: {fileID: 0}
     - target: {fileID: 2031795650058194193, guid: 7a7ee0e56dd83ed4c9dea2f97b571032, type: 3}
       propertyPath: m_Name
       value: PF_PortalGate_Simple
