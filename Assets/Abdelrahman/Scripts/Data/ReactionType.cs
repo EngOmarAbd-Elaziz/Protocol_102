@@ -7,5 +7,5 @@ public enum ReactionType
     Ignite,
     OpenDoor,
     Explode,
-    Activate
+    ActivateAlarm,
 }

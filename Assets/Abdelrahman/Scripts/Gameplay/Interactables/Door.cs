@@ -6,7 +6,7 @@ public class Door : InteractableObject
     [SerializeField] private Transform doorModel;
     [SerializeField] private float openAngle = 90f;
     [SerializeField] private float rotationSpeed = 120f;
-    [SerializeField] private float openDelay = 0.7f;
+    [SerializeField] private float openDelay = 0.5f;
     private bool isOpen;
     private Quaternion closedRotation;
     private Quaternion openedRotation;
@@ -30,12 +30,12 @@ public class Door : InteractableObject
 
     private void OnEnable()
     {
-        Burner.OnBurnerActivated += HandleBurnerActivated;
+        Alarm.OnAlarmActivated += HandleAlarmActivated;
     }
 
     private void OnDisable()
     {
-        Burner.OnBurnerActivated -= HandleBurnerActivated;
+        Alarm.OnAlarmActivated -= HandleAlarmActivated;
     }
 
     public override void Interact()
@@ -55,6 +55,13 @@ public class Door : InteractableObject
         }
     }
 
+    public override void ResetState()
+    {
+        base.ResetState();
+        isOpen = false;
+        doorModel.localRotation = closedRotation;
+    }
+
     private void OpenDoor()
     {
         if (isOpen)
@@ -66,7 +73,7 @@ public class Door : InteractableObject
     }
 
     // بشغل الفانكشن في الايفينت فوق لما النار هناك تتفعل علشان نفتح منه الباب على طول
-    private void HandleBurnerActivated()
+    private void HandleAlarmActivated()
     {
         StartCoroutine(OpenDoorAfterDelay());
     }

@@ -4,6 +4,7 @@ public abstract class InteractableObject : MonoBehaviour , IInteractable
 {
     // Public :-
     public InteractableType InteractableType => interactableType;
+    public static InteractableObject Instance { get; private set; }
 
     // Private :-
     [Header("Visual")]
@@ -42,6 +43,11 @@ public abstract class InteractableObject : MonoBehaviour , IInteractable
 
         isReacted = true;
         Debug.Log($"{name} reacted with {reactionType}");
+    }
+
+    public virtual void ResetState()
+    {
+        isReacted = false;
     }
 
     public abstract void Interact();

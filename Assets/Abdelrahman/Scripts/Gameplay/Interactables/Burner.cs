@@ -5,6 +5,7 @@ using System;
 public class Burner : InteractableObject
 {
     public static event Action OnBurnerActivated;
+    
 
     [Header("Burner")]
     [SerializeField] private GameObject fireEffect;
@@ -33,6 +34,14 @@ public class Burner : InteractableObject
                 TurnOn();
                 break;
         }
+    }
+
+    public override void ResetState()
+    {
+        base.ResetState();
+        isOn = false;
+        fireEffect.SetActive(false);
+        lightOfFire.SetActive(false);
     }
 
     private void TurnOn()

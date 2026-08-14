@@ -8,6 +8,10 @@ public class SimulationManager : MonoBehaviour
     public static SimulationManager Instance { get; private set; }
 
     [SerializeField] private List<ReactionData> reactionData;
+    [Space(30)]
+    [SerializeField] private InteractableObject[] interactableObjects;
+    [Space(10)]
+    [SerializeField] private Alarm alarm;
     private bool isSimulationRunning;
     public bool IsSimulationRunning => isSimulationRunning;
 
@@ -20,7 +24,7 @@ public class SimulationManager : MonoBehaviour
     }
 
 
-
+    // هنا بعمل فانكشن علشان ابدأ السيملشن وارجع تحذير لو السيملشن شغال او مفيش حاجة اتخططت وبيشتغل بزرار هناك
     public void StartSimulation()
     {
 
@@ -88,10 +92,19 @@ public class SimulationManager : MonoBehaviour
         }
         return ReactionType.None;
     }
-    // ده فانكشن حاطه على زرار برا علشان ابدا منه السيموليشن
-    public void ClickToStart() 
+
+    // بعمل ريست للسيملشن وارجع كل حاجة زي ما كانت عن رطيق زرار هناك
+    public void ResetSimulation()
     {
-        StartSimulation();
+        StopAllCoroutines();
+        isSimulationRunning = false;
+        PlanningManager.Instance.ClearActions();
+        foreach (InteractableObject obj in interactableObjects)
+        {
+            obj.ResetState();
+        }
+        Alarm.Instance.ResetAlarm();
+        Debug.Log("Simulation Reset.");
     }
 
 }

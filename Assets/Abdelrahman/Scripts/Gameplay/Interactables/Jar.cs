@@ -10,9 +10,14 @@ public class Jar : InteractableObject
     [SerializeField] private int liquidMaterialIndex = 3;
     [SerializeField] private Material purpleMaterial;
     private Material currentLiquidMaterial;
-
+    private Material originalLiquidMaterial;
 
     private bool isMixed = false;
+
+    private void Start()
+    {
+        originalLiquidMaterial = meshRenderer.materials[liquidMaterialIndex];
+    }
 
     public override void Interact() 
     {
@@ -25,7 +30,7 @@ public class Jar : InteractableObject
         base.ApplyReaction(reactionType);
 
         // هنا بعمل سويتش عشان اعمل الرياكشن اللي انا عايزه + معرفتش اعمله بإف علشان تحويل الرياكشن لبولينج وكده
-        switch (reactionType) 
+        switch (reactionType)
         {
             case ReactionType.Mix:
                 isMixed = true;
@@ -33,8 +38,14 @@ public class Jar : InteractableObject
                 Debug.Log("Jar Mixed");
                 break;
         }
+    }
 
-}
+    public override void ResetState()
+    {
+        base.ResetState();
+        isMixed = false;
+        ChangeLiquidMaterial(originalLiquidMaterial);
+    }
 
     public void ChangeLiquidMaterial(Material newMaterial)
     {
