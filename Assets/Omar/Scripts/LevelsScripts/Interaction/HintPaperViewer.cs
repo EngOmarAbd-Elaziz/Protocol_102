@@ -7,6 +7,7 @@ public class HintPaperViewer : MonoBehaviour
     [Header("Open Settings")]
     [SerializeField] private float moveDuration = 0.4f;
     [SerializeField] private Vector3 rotationOffset;
+    [SerializeField] private Vector3 targetPosition = new Vector3(3.81f, 1.27f, -9.04f);
 
     [Header("Close Button")]
     [SerializeField] private GameObject closeButton;
@@ -70,12 +71,6 @@ public class HintPaperViewer : MonoBehaviour
             return;
 
         isOpen = true;
-
-        Vector3 targetPosition = new Vector3(
-            3.81f,
-            1.27f,
-            -9.04f
-        );
 
         Quaternion targetRotation =
             mainCamera.transform.rotation;

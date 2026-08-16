@@ -1,7 +1,3 @@
-
-
-
-
 public enum InteractableType
 {
     None,
@@ -10,6 +6,9 @@ public enum InteractableType
     PurpleChemical,
     Burner,
     Door,
+    Mortar,
+    Boiler,
+    KeyInput,
     Key,
 }
 
