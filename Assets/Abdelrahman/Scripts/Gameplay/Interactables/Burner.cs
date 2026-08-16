@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
-using System;
 
 public class Burner : InteractableObject
 {
-    public static event Action OnBurnerActivated;
-    
+
 
     [Header("Burner")]
     [SerializeField] private GameObject fireEffect;
@@ -21,19 +19,12 @@ public class Burner : InteractableObject
 
     public override void Interact()
     {
-        
+
     }
 
     public override void ApplyReaction(ReactionType reactionType)
     {
         base.ApplyReaction(reactionType);
-
-        switch (reactionType)
-        {
-            case ReactionType.Ignite:
-                TurnOn();
-                break;
-        }
     }
 
     public override void ResetState()
@@ -44,7 +35,7 @@ public class Burner : InteractableObject
         lightOfFire.SetActive(false);
     }
 
-    private void TurnOn()
+    public void TurnOn()
     {
         if (isOn)
         {
@@ -55,7 +46,5 @@ public class Burner : InteractableObject
         fireEffect.SetActive(true);
         lightOfFire.SetActive(true);
 
-        // بنده الفانشكن اللي جوا لما النار تشتغل علشان افتح الباب بيها
-        OnBurnerActivated?.Invoke();
     }
 }

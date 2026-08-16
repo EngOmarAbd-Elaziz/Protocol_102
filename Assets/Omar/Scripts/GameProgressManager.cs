@@ -31,6 +31,15 @@ public class GameProgressManager : MonoBehaviour
         return PlayerPrefs.GetInt(LAST_LEVEL_KEY, firstLevelIndex);
     }
 
+    public void SaveAndQuit()
+    {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+        SaveLevel(currentLevel);
+
+        Loader.Load(2);
+    }
+
     public void SaveLevel(int levelIndex)
     {
         PlayerPrefs.SetInt(LAST_LEVEL_KEY, levelIndex);
@@ -51,4 +60,12 @@ public class GameProgressManager : MonoBehaviour
 
         Loader.Load(firstLevelIndex);
     }
+
+#if UNITY_EDITOR
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteKey(LAST_LEVEL_KEY);
+        PlayerPrefs.Save();
+    }
+#endif
 }

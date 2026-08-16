@@ -19,8 +19,11 @@ public class SettingsUIButton : MonoBehaviour
     public void CloseSettingsUI()
     {
         settingsUI.SetActive(false);
-        PrefabsModels.SetActive(true);
-        mainMenuUI.SetActive(true);
+        if (PrefabsModels != null)
+            PrefabsModels.SetActive(true);
+
+        if (mainMenuUI != null)
+            mainMenuUI.SetActive(true);
     }
 
     private IEnumerator OpenRoutine()
@@ -28,7 +31,10 @@ public class SettingsUIButton : MonoBehaviour
         yield return new WaitForSeconds(buttonDelay);
 
         settingsUI.SetActive(true);
-        PrefabsModels.SetActive(false);
-        mainMenuUI.SetActive(false);
+        if (PrefabsModels != null)
+            PrefabsModels.SetActive(false);
+
+        if (mainMenuUI != null)
+            mainMenuUI.SetActive(false);
     }
 }

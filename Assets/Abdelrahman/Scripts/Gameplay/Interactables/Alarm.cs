@@ -1,11 +1,10 @@
-using System;
+
 using System.Collections;
 using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
 
-    public static event Action OnAlarmActivated;
     public static Alarm Instance { get; private set; }
 
     [SerializeField] private float activationDelay = 1f;
@@ -25,30 +24,9 @@ public class Alarm : MonoBehaviour
         alarmLight.SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        Burner.OnBurnerActivated += HandleBurnerActivated;
-    }
 
-    private void OnDisable()
+    public void ActivateAlarm()
     {
-        Burner.OnBurnerActivated -= HandleBurnerActivated;
-    }
-
-    public void HandleBurnerActivated()
-    {
-        StartCoroutine(ActivateAlarmDelay());
-    }
-
-    IEnumerator ActivateAlarmDelay()
-    {
-        yield return new WaitForSeconds(activationDelay);
-        ActivateAlarm();
-    }
-
-    private void ActivateAlarm()
-    {
-
         if (isActivated)
         {
             return;
@@ -56,8 +34,6 @@ public class Alarm : MonoBehaviour
 
         isActivated = true;
         alarmLight.SetActive(true);
-
-        OnAlarmActivated?.Invoke();
     }
 
     public void ResetAlarm()

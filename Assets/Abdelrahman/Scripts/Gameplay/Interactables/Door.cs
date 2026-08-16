@@ -28,16 +28,6 @@ public class Door : InteractableObject
 
     }
 
-    private void OnEnable()
-    {
-        Alarm.OnAlarmActivated += HandleAlarmActivated;
-    }
-
-    private void OnDisable()
-    {
-        Alarm.OnAlarmActivated -= HandleAlarmActivated;
-    }
-
     public override void Interact()
     {
 
@@ -62,20 +52,14 @@ public class Door : InteractableObject
         doorModel.localRotation = closedRotation;
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         if (isOpen)
         {
             return;
         }
-        
-        isOpen = true;
-    }
 
-    // بشغل الفانكشن في الايفينت فوق لما النار هناك تتفعل علشان نفتح منه الباب على طول
-    private void HandleAlarmActivated()
-    {
-        StartCoroutine(OpenDoorAfterDelay());
+        isOpen = true;
     }
 
     IEnumerator OpenDoorAfterDelay()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class InteractableObject : MonoBehaviour , IInteractable
+public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
     // Public :-
     public InteractableType InteractableType => interactableType;
@@ -51,5 +51,5 @@ public abstract class InteractableObject : MonoBehaviour , IInteractable
     }
 
     public abstract void Interact();
-    
+
 }

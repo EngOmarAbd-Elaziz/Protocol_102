@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using System;
 using UnityEngine;
 
 public class SimulationManager : MonoBehaviour
@@ -14,6 +14,12 @@ public class SimulationManager : MonoBehaviour
     [SerializeField] private Alarm alarm;
     private bool isSimulationRunning;
     public bool IsSimulationRunning => isSimulationRunning;
+
+    bool simulationFailed = false;
+
+
+    public event Action OnSimulationFinished;
+    public event Action OnSimulationFailed;
 
     private void Awake()
     {
@@ -37,6 +43,8 @@ public class SimulationManager : MonoBehaviour
         if (PlanningManager.Instance.GetPlannedActions().Count == 0)
         {
             Debug.LogWarning("No planned actions to simulate.");
+            simulationFailed = true;
+            OnSimulationFailed?.Invoke();
             return;
         }
 
@@ -45,17 +53,29 @@ public class SimulationManager : MonoBehaviour
 
     private IEnumerator RunSimulation()
     {
+        simulationFailed = false;
         isSimulationRunning = true;
         List<PlannedAction> actions = PlanningManager.Instance.GetPlannedActions();
         foreach (PlannedAction action in actions)
         {
             ExecuteAction(action);
-            yield return new WaitForSeconds(2f); 
+            yield return new WaitForSeconds(0.5f);
         }
 
         PlanningManager.Instance.ClearActions();
         isSimulationRunning = false;
+
+        if (simulationFailed)
+        {
+            Debug.LogWarning("Simulation Failed!");
+
+            OnSimulationFailed?.Invoke();
+            yield break;
+        }
+
         Debug.Log("Simulation Finished.");
+
+        OnSimulationFinished?.Invoke();
     }
 
     private void ExecuteAction(PlannedAction action)
@@ -66,16 +86,9 @@ public class SimulationManager : MonoBehaviour
 
         if (reaction == ReactionType.None)
         {
+            simulationFailed = true;
             return;
         }
-        // هنا بتاكد ان البرطمان بتاعي اتفاعل مع اللي قبله علشان يقدر يولع النار
-        if (action.Source is Jar jar && !jar.IsMixed)
-        {
-            Debug.Log("Jar is not mixed yet.");
-            return;
-        }
-
-        //action.Source.ApplyReaction(reaction);
         // هنا بقول للتارجت انه يتفاعل مع الرياكشن اللي حصل علشان نكمل السلسلة
         action.Target.ApplyReaction(reaction);
     }
@@ -84,7 +97,7 @@ public class SimulationManager : MonoBehaviour
     {
         foreach (ReactionData data in reactionData)
         {
-           // بتاكد من ترتيب المتفاعلات علشان يحصل صح
+            // بتاكد من ترتيب المتفاعلات علشان يحصل صح
             if (data.sourceType == source && data.targetType == target)
             {
                 return data.reactionType;
@@ -98,6 +111,7 @@ public class SimulationManager : MonoBehaviour
     {
         StopAllCoroutines();
         isSimulationRunning = false;
+        simulationFailed = false;
         PlanningManager.Instance.ClearActions();
         foreach (InteractableObject obj in interactableObjects)
         {

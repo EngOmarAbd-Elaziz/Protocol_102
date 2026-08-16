@@ -19,7 +19,7 @@ public class Jar : InteractableObject
         originalLiquidMaterial = meshRenderer.materials[liquidMaterialIndex];
     }
 
-    public override void Interact() 
+    public override void Interact()
     {
 
     }
@@ -34,7 +34,7 @@ public class Jar : InteractableObject
         {
             case ReactionType.Mix:
                 isMixed = true;
-                ChangeLiquidMaterial(purpleMaterial);
+
                 Debug.Log("Jar Mixed");
                 break;
         }
