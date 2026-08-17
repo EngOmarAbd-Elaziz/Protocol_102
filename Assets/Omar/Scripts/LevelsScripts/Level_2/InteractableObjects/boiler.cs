@@ -1,16 +1,35 @@
 using UnityEngine;
 
-public class boiler : MonoBehaviour
+public class boiler : InteractableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private int liquidMaterialIndex = 1;
+    [SerializeField] private Material theNewMaterial;
+    private Material originalLiquidMaterial;
+
+    private bool isMixed = false;
+
+
+
+    private void Start()
+    {
+        originalLiquidMaterial = meshRenderer.materials[liquidMaterialIndex];
+    }
+
+    public override void Interact()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ApplyReaction(ReactionType reactionType)
     {
-        
+        base.ApplyReaction(reactionType);
+
+        switch (reactionType) 
+        {
+            case ReactionType.Mix2:
+                isMixed = true; 
+                break;
+        }
     }
 }
