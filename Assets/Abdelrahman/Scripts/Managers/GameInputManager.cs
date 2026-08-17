@@ -13,16 +13,20 @@ public class GameInputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
         {
-            Instance = this;
+            Destroy(gameObject);
+            return;
         }
 
+        Instance = this;
         inputSystem = new MyNewInputSystem();
     }
 
     private void OnEnable()
     {
+        Debug.Log("GAME INPUT MANAGER ENABLED");
+
         inputSystem.Enable();
 
         inputSystem.Player.Interact.performed += GameInputManager_OnInteract;
@@ -38,8 +42,11 @@ public class GameInputManager : MonoBehaviour
 
     private void GameInputManager_OnInteract(InputAction.CallbackContext context)
     {
+        Debug.Log($"INTERACT RECEIVED: {context.control}");
+
         if (context.performed)
         {
+            Debug.Log("INTERACT PRESSED");
             OnInteract?.Invoke(); 
         }
     }

@@ -9,15 +9,21 @@ public class SelectionManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     //private IInteractable currentSelection;
 
-
-    private void OnEnable()
+    private void Start()
     {
         GameInputManager.Instance.OnInteract += HandleSelection;
     }
 
+    //private void OnEnable()
+    //{
+    //}
+
     private void OnDisable()
     {
-        GameInputManager.Instance.OnInteract -= HandleSelection;
+        if (GameInputManager.Instance != null)
+        {
+            GameInputManager.Instance.OnInteract -= HandleSelection;
+        }
     }
 
 
