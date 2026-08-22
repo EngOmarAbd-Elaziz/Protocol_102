@@ -104,8 +104,8 @@ public class LevelTwo : LevelSequenceController
         if (diamondKey != null)
         {
             diamondKey.gameObject.SetActive(true);
-            PlaySound(diamondKeyMoveSound);
             yield return StartCoroutine(MoveToTarget(diamondKey, keyHolder.position, diamondKeyMoveDuration));
+            PlaySound(diamondKeyMoveSound);
             yield return new WaitForSeconds(stepDelay);
         }
 

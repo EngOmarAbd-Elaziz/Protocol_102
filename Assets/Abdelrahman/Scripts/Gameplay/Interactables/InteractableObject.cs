@@ -4,15 +4,17 @@ public abstract class InteractableObject : MonoBehaviour, IInteractable
 {
     // Public :-
     public InteractableType InteractableType => interactableType;
-    public static InteractableObject Instance { get; private set; }
 
     // Private :-
     [Header("Visual")]
     [SerializeField] private Renderer objectRenderer;
     [SerializeField] private Color selectedColor = Color.yellow;
     private Color originalColor;
+
+
     [Header("Interactable Settings")]
     [SerializeField] private InteractableType interactableType;
+
     private bool isReacted = false;
 
 

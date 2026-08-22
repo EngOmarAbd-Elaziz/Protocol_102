@@ -14,10 +14,6 @@ public class SelectionManager : MonoBehaviour
         GameInputManager.Instance.OnInteract += HandleSelection;
     }
 
-    //private void OnEnable()
-    //{
-    //}
-
     private void OnDisable()
     {
         if (GameInputManager.Instance != null)
@@ -25,9 +21,6 @@ public class SelectionManager : MonoBehaviour
             GameInputManager.Instance.OnInteract -= HandleSelection;
         }
     }
-
-
-
 
     private void HandleSelection()
     {

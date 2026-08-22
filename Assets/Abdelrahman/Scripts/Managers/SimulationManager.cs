@@ -7,19 +7,27 @@ public class SimulationManager : MonoBehaviour
 {
     public static SimulationManager Instance { get; private set; }
 
+    [Header("Required Sequence")]
     [SerializeField] private List<ReactionData> reactionData;
+
     [Space(30)]
+
+    [Header("Interactable Objects")]
     [SerializeField] private InteractableObject[] interactableObjects;
+
     [Space(10)]
+
+    [Header("Alarm")]
     [SerializeField] private Alarm alarm;
+
     private bool isSimulationRunning;
     public bool IsSimulationRunning => isSimulationRunning;
 
-    bool simulationFailed = false;
-
+    private bool simulationFailed;
 
     public event Action OnSimulationFinished;
     public event Action OnSimulationFailed;
+
 
     private void Awake()
     {
@@ -27,98 +35,216 @@ public class SimulationManager : MonoBehaviour
         {
             Instance = this;
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 
-    // هنا بعمل فانكشن علشان ابدأ السيملشن وارجع تحذير لو السيملشن شغال او مفيش حاجة اتخططت وبيشتغل بزرار هناك
+    // Starts the simulation after validating the complete sequence.
     public void StartSimulation()
     {
-
         if (isSimulationRunning)
         {
             Debug.LogWarning("Simulation is already running.");
             return;
         }
 
-        if (PlanningManager.Instance.GetPlannedActions().Count == 0)
+        List<PlannedAction> actions =
+            PlanningManager.Instance.GetPlannedActions();
+
+        // Make sure the player planned at least one action.
+        if (actions.Count == 0)
         {
             Debug.LogWarning("No planned actions to simulate.");
+
             simulationFailed = true;
             OnSimulationFailed?.Invoke();
+
+            return;
+        }
+
+        // Validate the complete sequence before starting the simulation.
+        if (!ValidateSequence())
+        {
+            Debug.LogWarning("Simulation failed: Wrong sequence.");
+
+            simulationFailed = true;
+            OnSimulationFailed?.Invoke();
+
             return;
         }
 
         StartCoroutine(RunSimulation());
     }
 
+
+    // Checks whether the player's planned actions
+    // match the complete required sequence of the current level.
+    private bool ValidateSequence()
+    {
+        List<PlannedAction> plannedActions =
+            PlanningManager.Instance.GetPlannedActions();
+
+        // Check the number of actions first.
+        if (plannedActions.Count != reactionData.Count)
+        {
+            Debug.LogWarning(
+                $"Wrong sequence length. " +
+                $"Expected: {reactionData.Count} actions, " +
+                $"Received: {plannedActions.Count}."
+            );
+
+            return false;
+        }
+
+        // Check every action against the required sequence
+        // using the exact same order.
+        for (int i = 0; i < reactionData.Count; i++)
+        {
+            ReactionData expectedReaction = reactionData[i];
+            PlannedAction plannedAction = plannedActions[i];
+
+            if (plannedAction.Source == null ||
+                plannedAction.Target == null)
+            {
+                Debug.LogWarning(
+                    $"Invalid PlannedAction at step {i}: " +
+                    "Source or Target is null."
+                );
+
+                return false;
+            }
+
+            InteractableType actualSource =
+                plannedAction.Source.InteractableType;
+
+            InteractableType actualTarget =
+                plannedAction.Target.InteractableType;
+
+            // Compare the player's action with the required action.
+            if (actualSource != expectedReaction.sourceType ||
+                actualTarget != expectedReaction.targetType)
+            {
+                Debug.LogWarning(
+                    $"Wrong sequence at step {i}. " +
+                    $"Expected: {expectedReaction.sourceType} -> {expectedReaction.targetType}, " +
+                    $"Received: {actualSource} -> {actualTarget}."
+                );
+
+                return false;
+            }
+        }
+
+        Debug.Log("Complete sequence validated successfully.");
+
+        return true;
+    }
+
+
     private IEnumerator RunSimulation()
     {
         simulationFailed = false;
         isSimulationRunning = true;
-        List<PlannedAction> actions = PlanningManager.Instance.GetPlannedActions();
-        foreach (PlannedAction action in actions)
+
+        List<PlannedAction> actions =
+            PlanningManager.Instance.GetPlannedActions();
+
+        // Execute every planned action in order.
+        for (int i = 0; i < actions.Count; i++)
         {
-            ExecuteAction(action);
+            ExecuteAction(actions[i], reactionData[i]);
+
+            // Stop immediately if something goes wrong.
+            if (simulationFailed)
+            {
+                isSimulationRunning = false;
+
+                Debug.LogWarning("Simulation Failed.");
+
+                OnSimulationFailed?.Invoke();
+
+                yield break;
+            }
+
             yield return new WaitForSeconds(0.5f);
         }
 
+        // Clear the player's planned actions after a successful simulation.
         PlanningManager.Instance.ClearActions();
+
         isSimulationRunning = false;
-
-        if (simulationFailed)
-        {
-            Debug.LogWarning("Simulation Failed!");
-
-            OnSimulationFailed?.Invoke();
-            yield break;
-        }
 
         Debug.Log("Simulation Finished.");
 
         OnSimulationFinished?.Invoke();
     }
 
-    private void ExecuteAction(PlannedAction action)
+
+    // Executes a specific action using the ReactionData
+    // assigned to the same sequence index.
+    private void ExecuteAction(
+        PlannedAction action,
+        ReactionData expectedReaction)
     {
-        ReactionType reaction = GetReactionData(action.Source.InteractableType, action.Target.InteractableType);
-
-        Debug.Log(reaction);
-
-        if (reaction == ReactionType.None)
+        if (action.Source == null || action.Target == null)
         {
             simulationFailed = true;
+
+            Debug.LogWarning(
+                "Simulation failed: Source or Target is null."
+            );
+
             return;
         }
-        // هنا بقول للتارجت انه يتفاعل مع الرياكشن اللي حصل علشان نكمل السلسلة
-        action.Target.ApplyReaction(reaction);
-    }
 
-    private ReactionType GetReactionData(InteractableType source, InteractableType target)
-    {
-        foreach (ReactionData data in reactionData)
+        if (expectedReaction == null)
         {
-            // بتاكد من ترتيب المتفاعلات علشان يحصل صح
-            if (data.sourceType == source && data.targetType == target)
-            {
-                return data.reactionType;
-            }
+            simulationFailed = true;
+
+            Debug.LogWarning(
+                "Simulation failed: ReactionData is null."
+            );
+
+            return;
         }
-        return ReactionType.None;
+
+        Debug.Log(
+            $"Executing Step: " +
+            $"{expectedReaction.sourceType} -> " +
+            $"{expectedReaction.targetType} " +
+            $"= {expectedReaction.reactionType}"
+        );
+
+        // Apply the reaction that belongs to this sequence step.
+        action.Target.ApplyReaction(expectedReaction.reactionType);
     }
 
-    // بعمل ريست للسيملشن وارجع كل حاجة زي ما كانت عن رطيق زرار هناك
+
+    // Resets the simulation and restores all interactable objects.
     public void ResetSimulation()
     {
         StopAllCoroutines();
+
         isSimulationRunning = false;
         simulationFailed = false;
+
         PlanningManager.Instance.ClearActions();
+
         foreach (InteractableObject obj in interactableObjects)
         {
-            obj.ResetState();
+            if (obj != null)
+            {
+                obj.ResetState();
+            }
         }
-        Alarm.Instance.ResetAlarm();
+
+        if (Alarm.Instance != null)
+        {
+            Alarm.Instance.ResetAlarm();
+        }
+
         Debug.Log("Simulation Reset.");
     }
-
 }

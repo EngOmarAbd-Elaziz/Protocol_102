@@ -1449,7 +1449,7 @@ MonoBehaviour:
   mortarMoveDuration: 1
   cameraMoveDuration: 2
   mixSound: {fileID: 8300000, guid: 16d91ebb8a078d045a96a5527d60c115, type: 3}
-  diamondKeyMoveSound: {fileID: 0}
+  diamondKeyMoveSound: {fileID: 8300000, guid: 41f2d53c927ac3a47a986835e8787ace, type: 3}
   alarmSound: {fileID: 8300000, guid: efb152373f423bd4ca279c246a66c8fa, type: 3}
   doorSound: {fileID: 8300000, guid: 03b4ff1731d54e742957054205e4496c, type: 3}
 --- !u!4 &618488044
@@ -1679,6 +1679,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751465264}
   m_CullTransparentMesh: 1
+--- !u!23 &760022475 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3722850628574544997, guid: f230ef646618e754c8eb29eb3573f48c, type: 3}
+  m_PrefabInstance: {fileID: 2074416227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &765073308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,6 +2348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01f81e895521b34e874080ebbf9c9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlanningManager
+  actionFeedbackDuration: 0.15
 --- !u!1 &956956222
 GameObject:
   m_ObjectHideFlags: 0
@@ -6881,6 +6887,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c020a990334664b99e5d87751644cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::keyInput
+  objectRenderer: {fileID: 760022475}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  interactableType: 8
 --- !u!1001 &2134825275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6956,9 +6965,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1304413462209204940, guid: 3226077b1e4998f46bb66247cfd79071, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2134825278}
-    - targetCorrespondingSourceObject: {fileID: 1304413462209204940, guid: 3226077b1e4998f46bb66247cfd79071, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2134825279}
   m_SourcePrefab: {fileID: 100100000, guid: 3226077b1e4998f46bb66247cfd79071, type: 3}
 --- !u!4 &2134825276 stripped
 Transform:
@@ -6991,18 +6997,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.11680182, y: 0.031360377, z: 0.11985266}
   m_Center: {x: -0.011324193, y: 0.0017486606, z: 0}
---- !u!114 &2134825279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2134825277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8710a52b7371d4746ab74ad41fd7ede3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::diamondKey
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
