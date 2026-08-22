@@ -555,9 +555,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd9ef4cb00847e4eb3775b7cd9d141b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::mortar
-  objectRenderer: {fileID: 0}
+  objectRenderer: {fileID: 1597762346}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  interactableType: 0
+  interactableType: 6
 --- !u!1 &260456138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1427,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae36094af7e4d64fb35675aeca2c4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelTwo
+  potion: {fileID: 1599505256}
+  mortar: {fileID: 242957166}
+  jar: {fileID: 1636827787}
+  boiler: {fileID: 1043553878}
+  diamondKey: {fileID: 2134825276}
+  keyHolder: {fileID: 2074416228}
+  door: {fileID: 1838483818}
+  alarm: {fileID: 350604534}
+  jarRenderer: {fileID: 1636827789}
+  mortarRenderer: {fileID: 1597762346}
+  boilerRenderer: {fileID: 1043553883}
+  newLiquidMaterial_1: {fileID: 2100000, guid: 36848deb246878249991c4059727891d, type: 2}
+  newLiquidMaterial_2: {fileID: 2100000, guid: f4192cf4965b6d748bdbd46a5e2d42eb, type: 2}
+  sequenceCameraTarget: {fileID: 839158336}
+  fadeCanvasGroup: {fileID: 1875107012}
+  fadeDuration: 1
+  potionMoveDuration: 1
+  jarMoveDuration: 1
+  diamondKeyMoveDuration: 1
+  mortarMoveDuration: 1
+  cameraMoveDuration: 2
+  mixSound: {fileID: 8300000, guid: 16d91ebb8a078d045a96a5527d60c115, type: 3}
+  diamondKeyMoveSound: {fileID: 0}
+  alarmSound: {fileID: 8300000, guid: efb152373f423bd4ca279c246a66c8fa, type: 3}
+  doorSound: {fileID: 8300000, guid: 03b4ff1731d54e742957054205e4496c, type: 3}
 --- !u!4 &618488044
 Transform:
   m_ObjectHideFlags: 0
@@ -2187,13 +2212,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839158333}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.22159792, y: -0.11347923, z: 0.02595986, w: -0.96816474}
-  m_LocalPosition: {x: -0.2249111, y: 2.6084673, z: -7.9319124}
+  m_LocalRotation: {x: 0.2148263, y: 0.1189805, z: -0.026377339, w: 0.96901894}
+  m_LocalPosition: {x: -0.3, y: 2.4, z: -8.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 19.002, y: 11.7, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 14, z: 0}
 --- !u!114 &839158337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2799,7 +2824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::boiler
   objectRenderer: {fileID: 1043553883}
   selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  interactableType: 0
+  interactableType: 7
   meshRenderer: {fileID: 1043553883}
   liquidMaterialIndex: 1
   theNewMaterial: {fileID: 2100000, guid: c650192073cb29344b9e07e9aac5aeee, type: 2}
@@ -4240,7 +4265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.806
+      value: 2.84
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4248,23 +4273,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.0150003
+      value: -6.076
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8821419
+      value: 0.9936113
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.47098377
+      value: 0.1128564
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4272,7 +4297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 56.196
+      value: 12.96
       objectReference: {fileID: 0}
     - target: {fileID: 3279072514326338627, guid: 67eb9e582e89a2b4387547b9c9449df0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -4322,8 +4347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HintPaperViewer
   moveDuration: 0.4
-  rotationOffset: {x: -90, y: 0, z: 0}
-  targetPosition: {x: -0.15, y: 2.41, z: -7.6}
+  rotationOffset: {x: -90, y: 0, z: 15}
+  targetPosition: {x: -0.2, y: 2.2, z: -8.15}
   closeButton: {fileID: 331162537}
 --- !u!114 &1451521229
 MonoBehaviour:
@@ -4590,6 +4615,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1597762346 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 80104155860749001, guid: 26f2a5126559b6944920ca021a707319, type: 3}
+  m_PrefabInstance: {fileID: 242957165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1599505255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6142,6 +6172,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9165158319966190156, guid: 80818cecb4de717408e5182dbecdb93c, type: 3}
   m_PrefabInstance: {fileID: 1838483816}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838483818 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4956694310496002688, guid: 80818cecb4de717408e5182dbecdb93c, type: 3}
+  m_PrefabInstance: {fileID: 1838483816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a54e40049672b45a1c296e93ef0d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
 --- !u!1 &1873595407
 GameObject:
   m_ObjectHideFlags: 0
@@ -6712,8 +6753,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 912d1b1098eb0674ca9833d0fe7222bd, type: 2}
   interactableObjects:
   - {fileID: 1599505261}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 242957170}
+  - {fileID: 1043553882}
+  - {fileID: 1636827792}
   alarm: {fileID: 350604534}
 --- !u!1001 &2074416227
 PrefabInstance:
@@ -6869,7 +6911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5845281611359883552, guid: 3226077b1e4998f46bb66247cfd79071, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.10548936
+      value: -0.13
       objectReference: {fileID: 0}
     - target: {fileID: 5845281611359883552, guid: 3226077b1e4998f46bb66247cfd79071, type: 3}
       propertyPath: m_LocalPosition.z

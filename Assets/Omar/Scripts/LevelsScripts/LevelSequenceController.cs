@@ -28,5 +28,4 @@ public abstract class LevelSequenceController : MonoBehaviour
     }
 
     protected abstract void StartSequence();
-
 }

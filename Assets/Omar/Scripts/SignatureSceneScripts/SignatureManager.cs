@@ -5,7 +5,7 @@ using UnityEngine.Video;
 public class SignatureManager : MonoBehaviour
 {
     [SerializeField] private VideoPlayer videoPlayer;
-    [SerializeField] private int _mainMenuScene = 1;
+    [SerializeField] private int _mainMenuScene = 2;
 
     private void Start()
     {
